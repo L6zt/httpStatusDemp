@@ -1,3 +1,8 @@
+/* 
+  borhter, 看着 http 说明 对应的响应头
+  boreher, 看着 node koa 文档进行对应操作
+  我很菜
+*/
 const koa = require('koa')
 const $path = require('path')
 const fs = require('fs');
