@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/jquery.js"></script>
+    <title>happy</title>
+</head>
+   <div class="session-content">
+       <input class="input"/>
+       <section class="data">
+       </section>  
+   </div>    
+<body>
+    <script>
+      const win = window
+      const session = win.sessionStorage
+      let index = 0
+      const renderData = () => {
+        const $dataContent = $('.data')
+        let cIndex = 0
+        while(session.getItem(`${index}_cs`)) {
+          $dataContent.append(`<p>key:${index}_cs, value:${session.getItem(`${index}_cs`)}</p>`)
+          index ++
+        }
+      }
+      renderData()
+      $('.input').on('keydown', function (e) {
+        const value  = $(this).val() || ''
+        session.setItem('index', index)
+        if (e.keyCode === 13) {
+          console.log('xx')
+          session.setItem(`${index}_cs`, value)
+        }
+        renderData()
+      })
+    </script>
+</body>
+
+</html>

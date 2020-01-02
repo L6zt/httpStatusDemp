@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/jquery.js"></script>
+    <title>happy</title>
+    <style>
+       *{
+         margin: 0;
+         padding: 0;
+         color: #fff;
+         text-align: center;
+       }
+        .absolute-container {
+          position: relative;
+          height: 400px;
+          background: red;
+        }
+        .absolute-container .box {
+          position: absolute;
+          width: 50px;
+          height: 50px;
+          background: yellowgreen;
+          top: 10px;
+          left: 10px;
+          line-height: 50px;
+        }
+        .fixed-container {
+          position: fixed;
+          right: 20px;
+          top: 20px;
+          background: rosybrown;
+          width: 50px;
+          height: 50px;
+          line-height: 50px;
+        }
+        .relative-container {
+          margin-top: 10px;
+          border-top:  1px solid #ccc;
+          border-bottom: 1px solid #ccc;
+        }
+        .relative-container .box {
+          position: relative;
+          top: -12px;
+          left: 20px;
+          width: 200px;
+          height: 100px;
+          line-height: 100px;
+          background: black;
+        }
+        .relative-container .down-box {
+         background: #03A9F4;
+        }
+    </style>  
+</head>
+
+<body>
+   <div class="absolute-container">
+      <div class="box">
+         ab
+      </div>
+   </div>
+  <div class="fixed-container">
+    fix
+   </div>
+  <div class="relative-container">
+     <div class="box">
+       relative
+     </div>
+     <div class="down-box">
+          我在relative 盒子下面
+     </div>
+   </div>
+</body>
+
+</html>

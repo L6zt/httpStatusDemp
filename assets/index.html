@@ -5,12 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/jquery.js"></script>
     <title>happy</title>
 </head>
-
+   <div class="ajax-content">
+   </div>    
 <body>
-    <h3>love a gril</h3>
-    <img src="./images/love.png" alt="">
+    <script>
+        $(function () {
+            const $content = $('.ajax-content');
+            $content.append(`<p>start ${new Date()}</p>`)
+                $.ajax({
+                    url: '/ajax/api',
+                    data: {
+                        test: 1
+                    },
+                    type: 'POST',
+                    success(res) {
+                        $content.append(`<p>end  ${new Date()}</p>`)
+                    }
+                })
+        })
+    </script>
 </body>
 
 </html>

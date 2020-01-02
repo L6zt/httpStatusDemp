@@ -89,8 +89,28 @@ app.use(async(ctx) => {
         })
         ctx.body = result;
     }
+    if (path === '/upload/file') {
+         const sv = fs.createWriteStream($path.join(__dirname, 'a.txt'))
+         ctx.req.pipe(sv)
+         await (new Promise((r, j) => {
+              sv.on('finish', r)
+         }))
+         ctx.body  = 'hihi'
+    }
+    if (path === '/ajax/api') {
+        await (new Promise((r, j) => {
+          setTimeout(() => {
+            ctx.response.set('Content-type', 'application/json')
+            ctx.body = JSON.stringify({flag: 0, data: {msg: 'haha'}})
+            r()
+          }, 1000)
+        }))
+    }
 })
-const startKoadApp = (port) => new Promise((r, j) => app.listen(port, (err) => {
+const startKoadApp = (port) => new Promise((r, j) => {
+   try {
+    app.listen(port, (err) => {
+    console.log('e', err)
     if (err) {
         j(prot + 1)
     } else {
@@ -101,7 +121,12 @@ const startKoadApp = (port) => new Promise((r, j) => app.listen(port, (err) => {
         console.log(`${prefix}/assets/index.html`);
         console.log('***--***');
     }
-}));
+})
+   }
+   catch (e) {
+       j(port + 1)
+   }
+});
 startKoadApp(defaultPort).catch(e => {
     defaultPort++
     startKoadApp(defaultPort)

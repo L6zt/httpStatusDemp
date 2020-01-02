@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/jquery.js"></script>
+    <title>happy</title>
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      * {
+        margin: 0;
+        padding:  0;
+      }
+      .wait-control {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: 50px;
+        height: 50px;
+        box-sizing: border-box;
+        box-shadow: 0 0 3px #ccc;
+        border-radius: 50%;
+        background: #f5f500;
+        box-sizing: border-box;
+      }
+      .wait-control-v2 {
+        width: 100px;
+        height: 100px;
+        animation-delay: 0.5s !important;
+        background: #d6d635;
+      }
+      .wait-control-v3 {
+        width: 200px;
+        height: 200px;
+        animation-delay: 1s  !important;
+        background: #f1f18a;
+      }
+      .rotate {
+        animation: rotate 2s ease-in infinite alternate both; 
+      }
+      @keyframes rotate {
+        0% {
+           transform: scale(1, 1);
+           box-shadow:  0 0 1px gold;
+        }
+        50% {
+          transform: scale(0.87, 0.87);
+          box-shadow:  0 0 5px orange;
+        }
+        100% {
+          transform: scale(1, 1);
+          box-shadow:  0 0 1px gold;
+        }
+      }
+      a {
+        display: block ;
+        padding: 5px 10px;
+        background: #ff5722;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 20px auto;
+      }
+    </style>
+</head>
+  <div class="wait-control wait-control-v3"></div>
+  <div class="wait-control wait-control-v2"></div>
+  <div class="wait-control"></div>
+   <a href="javascript:;">click</a>
+<body>
+    <script>
+      $(function () {
+        $('a').on('click', function () {
+           $('.wait-control').toggleClass('rotate')
+        })
+      })
+    </script>
+</body>
+
+</html>

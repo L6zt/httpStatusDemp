@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/jquery.js"></script>
+    <title>happy</title>
+    <style>
+        .orgin .block-box {
+          background: yellowgreen;
+        }
+       .orgin .inline-box span{
+          background: red;
+          margin-right: 10px;
+        }
+       .orgin .inline-block-box img {
+          width: 100px;
+          height: auto;
+          margin-right: 10px;
+        }
+        .mock .block-box {
+          display: block;
+          background: burlywood;
+        }
+        .mock .inline-box {
+          display: inline;
+          margin-right: 5px;
+          background: blanchedalmond;
+        }
+    </style>  
+</head>
+
+<body>
+  <div class="orgin">
+    <h3>原始盒子解析</h3>
+    <section class="block-box"> 
+        我是块级盒子
+    </section>
+
+    <p class="inline-box">
+      <span>我是行内盒子1</span>
+      <span>我是行内盒子2</span>
+      <span>我是行内盒子3</span>
+    </p>
+
+    <p class="inline-block-box">
+      <img src="./images/love.png" alt="">
+      <img src="./images/love.png" alt="">
+      <img src="./images/love.png" alt="">
+    </p>
+  </div>
+  <div class="mock">
+    <h3>css 控制 盒子属性</h3>
+    <section>
+    <span class="block-box">css 控制块级盒子</span>
+    </section>
+    <div>
+       <div class="inline-box">模拟行内盒子1</div>
+       <div class="inline-box">模拟行内盒子2</div>
+    </section>
+  </div> 
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="./js/jquery.js"></script>
+    <title>happy</title>
+  </head>
+  <div class="session-content">
+    <input class="input" />
+    <section class="data"></section>
+  </div>
+  <body>
+    <script>
+      var session = {
+        getItem: function(sKey) {
+          return (
+            decodeURIComponent(
+              document.cookie.replace(
+                new RegExp(
+                  "(?:(?:^|.*;)\\s*" +
+                    encodeURIComponent(sKey).replace(/[-.+*]/g, "\\$&") +
+                    "\\s*\\=\\s*([^;]*).*$)|^.*$"
+                ),
+                "$1"
+              )
+            ) || null
+          );
+        },
+        setItem: function(sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+          if (
+            !sKey ||
+            /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)
+          ) {
+            return false;
+          }
+          var sExpires = "";
+          if (vEnd) {
+            switch (vEnd.constructor) {
+              case Number:
+                sExpires =
+                  vEnd === Infinity
+                    ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT"
+                    : "; max-age=" + vEnd;
+                break;
+              case String:
+                sExpires = "; expires=" + vEnd;
+                break;
+              case Date:
+                sExpires = "; expires=" + vEnd.toUTCString();
+                break;
+            }
+          }
+          document.cookie =
+            encodeURIComponent(sKey) +
+            "=" +
+            encodeURIComponent(sValue) +
+            sExpires +
+            (sDomain ? "; domain=" + sDomain : "") +
+            (sPath ? "; path=" + sPath : "") +
+            (bSecure ? "; secure" : "");
+          return true;
+        },
+        removeItem: function(sKey, sPath, sDomain) {
+          if (!sKey || !this.hasItem(sKey)) {
+            return false;
+          }
+          document.cookie =
+            encodeURIComponent(sKey) +
+            "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" +
+            (sDomain ? "; domain=" + sDomain : "") +
+            (sPath ? "; path=" + sPath : "");
+          return true;
+        },
+        hasItem: function(sKey) {
+          return new RegExp(
+            "(?:^|;\\s*)" +
+              encodeURIComponent(sKey).replace(/[-.+*]/g, "\\$&") +
+              "\\s*\\="
+          ).test(document.cookie);
+        },
+        keys: /* optional method: you can safely remove it! */ function() {
+          var aKeys = document.cookie
+            .replace(
+              /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g,
+              ""
+            )
+            .split(/\s*(?:\=[^;]*)?;\s*/);
+          for (var nIdx = 0; nIdx < aKeys.length; nIdx++) {
+            aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]);
+          }
+          return aKeys;
+        }
+      };
+      let index = 0;
+      const renderData = () => {
+        const $dataContent = $(".data");
+        let cIndex = 0;
+        while (session.getItem(`${index}_cs`)) {
+          $dataContent.append(
+            `<p>key:${index}_cs, value:${session.getItem(`${index}_cs`)}</p>`
+          );
+          index++;
+        }
+      };
+      renderData();
+      $(".input").on("keydown", function(e) {
+        const value  = $(this).val() || ''
+        session.setItem("index", index)
+        if (e.keyCode === 13) {
+          console.log("xx");
+          session.setItem(`${index}_cs`, value , 60);
+        }
+        renderData();
+      })
+    </script>
+  </body>
+</html>
